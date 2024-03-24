@@ -13,7 +13,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        apk add python2
+        apk add python2 build-base
         npm install
 
     - name: Build
