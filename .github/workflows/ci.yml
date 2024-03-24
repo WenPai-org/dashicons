@@ -6,7 +6,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: node:10.24.1
+      image: node:10.24.1-alpine
 
     steps:
     - uses: actions/checkout@v2
@@ -17,21 +17,9 @@ jobs:
     - name: Build
       run: npm run build
 
-  zip:
-    needs: build
-    runs-on: ubuntu-latest
-    container:
-      image: alpine:latest
-
-    steps:
-    - uses: actions/checkout@v2
-
-    - name: Prepare environment
-      run: |
-        apk add zip
-
     - name: Zip files
       run: |
+        apk add zip
         cd icon-font
         zip -r icon-font.zip *
 
