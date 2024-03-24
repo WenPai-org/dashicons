@@ -3,7 +3,7 @@ name: CI
 on: [push]
 
 jobs:
-  prepare-job:
+  prepare:
     runs-on: ubuntu-latest
     container:
       image: node:10.24.1
@@ -19,8 +19,8 @@ jobs:
         path: node_modules
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
 
-  build-job:
-    needs: prepare-job
+  build:
+    needs: prepare
     runs-on: ubuntu-latest
     container:
       image: node:10.24.1
@@ -31,8 +31,8 @@ jobs:
     - name: Build
       run: npm run build
 
-  zip-job:
-    needs: build-job
+  zip:
+    needs: build
     runs-on: ubuntu-latest
     container:
       image: alpine:latest
